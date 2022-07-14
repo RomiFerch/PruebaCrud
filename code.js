@@ -1,10 +1,8 @@
 //variables Globales
 const formularioUI = document.querySelector('#formulario')
-const listaActividades = document.getElementById('listaA')
+const listaActividadesUI = document.getElementById('listaA')
 let arrayActividades = []
-let item = {
 
-}
 //funciones
 
 const CrearItem = (actividades) => {
@@ -17,7 +15,12 @@ const CrearItem = (actividades) => {
     return(item)
 
 }
-const GuardarDB = (actividad) => {
+const GuardarDB = () => {
+    localStorage.setItem('tareas', JSON.stringify(arrayActividades))
+
+}
+const LeerDB = () => {
+    listaActividadesUI.innerHTML = '';
 
 }
 
@@ -26,9 +29,11 @@ formularioUI.addEventListener('submit', (e)=>{
     let actividadUI = document.querySelector('#actividad').value;
 
     CrearItem(actividadUI)
-    formularioUI.reset()
-    
+    GuardarDB()
+
+    formularioUI.reset()  
 
 
   
 })
+document.addEventListener('DOMContentLoaded', LeerDB)
